@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script defer src="https://atikle.github.io/framework/universal/theme.js"></script>
+    <script defer src="https://atikle.github.io/framework/universal/script.js"></script>
+    
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://atikle.github.io/framework/universal/brand.css">
+    <link rel="stylesheet" href="https://atikle.github.io/framework/universal/style.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CK745SP72W"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-CK745SP72W');
+    </script>
+
+    <title>Contact Form | atikle</title>
+    <link rel="icon" href="https://atikle.github.io/resource/atikle-icon.png" type="image/x-icon">
+
+    <style>
+        /* Light Mode / Default Variables */
+        :root {
+            --background-1: #f3f4f6;
+            --background-2: #ffffff;
+            --background-3: #d1d5db;
+            --background-4: #f9fafb;
+            --background-5: #e5e7eb;
+            --card-background-1: #ffffff;
+            --card-background-2: #f9fafb;
+            --text-color-1: #111827;
+            --text-color-2: #4b5563;
+            --text-color-3: #ffffff;
+            --shadow-1: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-2: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            --link-color: #1d4ed8;
+            --button-background-1: #2563eb;
+            --button-background-2: #e5e7eb;
+            --button-background-3: #1d4ed8;
+            --button-text-1: #ffffff;
+            --button-text-2: #111827;
+            --button-text-3: #ffffff;
+            --hover-overlay: rgba(0, 0, 0, 0.04);
+            --success-bg: #dcfce7;
+            --success-border: #4ade80;
+            --success-text: #166534;
+            --error-bg: #fee2e2;
+            --error-border: #f87171;
+            --error-text: #b91c1c;
+        }
+
+        /* User's Dark Mode Variables */
+        body.dark-mode {
+            --background-1: black;
+            --background-2: black;
+            --background-3: #4b5563; /* Adjusted for better visibility */
+            --background-4: #242526;
+            --background-5: #18191a;
+            --card-background-1: #242526;
+            --card-background-2: #242526;
+            --text-color-1: white;
+            --text-color-2: #b0b3b8;
+            --text-color-3: black;
+            --shadow-1: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
+            --shadow-2: 0 2px 8px rgba(0, 0, 0, 0.25);
+            --link-color: #c0c1c5;
+            --button-background-1: #2d88ff;
+            --button-background-2: #3a3b3c;
+            --button-background-3: #6f74ff;
+            --button-text-1: #ffffff;
+            --button-text-2: #e4e6eb;
+            --button-text-3: #ffffff;
+            --hover-overlay: rgba(255, 255, 255, 0.08);
+            --success-bg: #14532d;
+            --success-border: #22c55e;
+            --success-text: #bbf7d0;
+            --error-bg: #7f1d1d;
+            --error-border: #ef4444;
+            --error-text: #fecaca;
+        }
+        
+        /* Base Styles & Resets */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-1);
+            color: var(--text-color-2);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        /* Form Container */
+        .form-container {
+            width: 100%;
+            max-width: 550px;
+            background-color: var(--card-background-1);
+            box-shadow: var(--shadow-1);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        /* Typography */
+        .form-container h1 {
+            color: var(--text-color-1);
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem;
+        }
+        .form-container .form-description {
+            margin: 0 0 2rem;
+            font-size: 1rem;
+        }
+
+        /* Form Fields Layout */
+        .form-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Input, Select, Textarea Styles */
+        .form-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background-color: var(--background-4);
+            border: 1px solid var(--background-3);
+            color: var(--text-color-1);
+            border-radius: 8px;
+            transition: all 0.2s ease-in-out;
+            font-size: 1rem;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--button-background-1);
+            box-shadow: 0 0 0 3px rgba(var(--button-background-1), 0.2);
+        }
+        .form-input::placeholder {
+            color: var(--text-color-2);
+            opacity: 0.7;
+        }
+        select.form-input {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+            background-position: right 0.7rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+        
+        /* Checkbox Styles */
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .checkbox-group input {
+            margin-top: 0.2rem;
+            height: 1.1em;
+            width: 1.1em;
+            accent-color: var(--button-background-1);
+        }
+        .checkbox-group .checkbox-label {
+            font-weight: 500;
+            color: var(--text-color-1);
+        }
+        .checkbox-group .checkbox-description {
+            font-size: 0.875rem;
+            color: var(--text-color-2);
+            opacity: 0.9;
+        }
+
+        /* Submit Button */
+        .submit-button {
+            width: 100%;
+            background-color: var(--button-background-1);
+            color: var(--button-text-1);
+            font-weight: 700;
+            padding: 0.9rem 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+            margin-top: 1rem;
+        }
+        .submit-button:hover {
+            opacity: 0.9;
+        }
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Message Styles */
+        .message-box {
+            display: none; /* Hidden by default */
+            padding: 1rem;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .message-box.success {
+            background-color: var(--success-bg);
+            border-color: var(--success-border);
+            color: var(--success-text);
+        }
+        .message-box.error {
+            background-color: var(--error-bg);
+            border-color: var(--error-border);
+            color: var(--error-text);
+        }
+        .message-box.show {
+            display: block;
+        }
+        .message-box strong {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 640px) {
+            .form-container {
+                padding: 2.5rem 3rem;
+            }
+        }
+    </style>
+</head>
+<body class=""> <!-- Add "dark-mode" class here to test -->
+
+    <div class="form-container">
+        <h1>Get in Touch</h1>
+        <p class="form-description">Fill out the form below, and we'll get back to you soon.</p>
+
+        <!-- Form Submission Message Placeholders -->
+        <div id="success-message" class="message-box success">
+            <strong>Success!</strong>
+            <span class="message-text">Your message has been sent.</span>
+        </div>
+        <div id="error-message" class="message-box error">
+            <strong>Oops!</strong>
+            <span id="error-text">Something went wrong. Please try again.</span>
+        </div>
+
+        <form id="contact-form" novalidate>
+            <div class="form-fields">
+                <div class="form-group">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" name="name" id="name" required class="form-input" placeholder="John Doe">
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" name="email" id="email" required pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Please enter a valid email address." class="form-input" placeholder="you@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone" class="form-label">Phone Number (Optional)</label>
+                    <input type="tel" name="phone" id="phone" pattern="\+?[0-9]{7,15}" title="Enter 7 to 15 digits, optionally starting with a '+'." class="form-input" placeholder="+1 (555) 123-4567">
+                </div>
+
+                <div class="form-group">
+                    <label for="country" class="form-label">Country</label>
+                    <input type="text" name="country" id="country" class="form-input" placeholder="United States">
+                </div>
+                
+                <div class="form-group">
+                    <label for="product" class="form-label">Product of Interest</label>
+                    <select name="product" id="product" required class="form-input">
+                        <option value="" disabled selected>Select a product</option>
+                        <option value="finatikle">finatikle</option>
+                        <option value="insights">insights</option>
+                        <option value="atikle connect">atikle connect</option>
+                        <option value="connect community">connect community</option>
+                    </select>
+                </div>
+
+                <div class="checkbox-group">
+                    <input id="spam-check" name="spam-check" type="checkbox" required>
+                    <div>
+                        <label for="spam-check" class="checkbox-label">Please confirm you are not a robot.</label>
+                        <p class="checkbox-description">Behind this screen is a real human, hoping to help. A thoughtful message makes our day!</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea name="message" id="message" rows="4" required class="form-input" placeholder="Your message here..."></textarea>
+                </div>
+            </div>
+
+            <button type="submit" id="submit-button" class="submit-button">
+                Send Message
+            </button>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('contact-form');
+        const submitButton = document.getElementById('submit-button');
+        const successMessage = document.getElementById('success-message');
+        const errorMessage = document.getElementById('error-message');
+        const errorText = document.getElementById('error-text');
+
+        // IMPORTANT: Replace this with your Google Apps Script Web App URL
+        const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+
+            // --- Start Validation ---
+            const emailInput = document.getElementById('email');
+            const phoneInput = document.getElementById('phone');
+            const spamCheck = document.getElementById('spam-check');
+            
+            // Clear previous messages
+            successMessage.classList.remove('show');
+            errorMessage.classList.remove('show');
+
+            // Check spam checkbox
+            if (!spamCheck.checked) {
+                errorText.textContent = 'Please check the box to confirm you are not a robot.';
+                errorMessage.classList.add('show');
+                return;
+            }
+
+            // Check email validity
+            if (!emailInput.checkValidity()) {
+                errorText.textContent = emailInput.title || 'Please enter a valid email address.';
+                errorMessage.classList.add('show');
+                return;
+            }
+            
+            // Check phone validity (only if a value is entered)
+            if (phoneInput.value && !phoneInput.checkValidity()) {
+                errorText.textContent = phoneInput.title || 'Please enter a valid phone number.';
+                errorMessage.classList.add('show');
+                return;
+            }
+            // --- End Validation ---
+
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    if (response.ok) return response.json();
+                    throw new Error('Network response was not ok.');
+                })
+                .then(data => {
+                    console.log('Success!', data);
+                    successMessage.classList.add('show');
+                    form.reset();
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    errorText.textContent = 'Something went wrong. Please try again later.';
+                    errorMessage.classList.add('show');
+                })
+                .finally(() => {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Send Message';
+                });
+        });
+    </script>
+
+</body>
+</html>
+
