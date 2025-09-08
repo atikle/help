@@ -85,6 +85,13 @@
             --error-border: #ef4444;
             --error-text: #fecaca;
         }
+
+        a {
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+        }
+
+        
         
         /* Base Styles & Resets */
         *, *::before, *::after {
@@ -92,43 +99,107 @@
         }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--background-1);
+            background-color: var(--background-2);
             color: var(--text-color-2);
             margin: 0;
+            min-height: 100vh;
+        }
+        
+        .navigation-header {
+            position: fixed;
+            background-color: var(--navbar-background-1);
+            /* padding: 0px 10px; */
+            height: 66px;
+            width: 100%;
+            top: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 2rem 1rem;
+            z-index: 1000; /* Ensure navbar is on top */
+            will-change: transform, box-shadow;
+        }
+
+        nav {
+            width: 95%;
+            border-radius: 10px;
+            /* max-width: 1650px; */
+            max-width: 1725px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .branding {
+            width: 300px;
+            left: 0;
+            font-size: 40px;
+            font-weight: 600;
+
+            padding-left: 5px;
+            z-index: 1001; /* Above mobile menu */
+        }
+
+        .help-centre-foil {
+            background: #C9FFBF;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #FFAFBD, #C9FFBF);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #FFAFBD, #C9FFBF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .help-centre-foil h1{
+            color: black;
+            font-size: 35px;
+            font-weight: 700;
+            line-height: 35px;
+        }
+        
+        .help-centre-foil h2{
+            color: white;
+            font-size: 25px;
+            font-weight: 500;
+            line-height: 25px;
+        }
+
+        .help-centre-foil {
+            margin-top: 66px;
+            width: 100%;
+            height: auto;
+            padding: 140px 20px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         /* Form Container */
         .form-container {
             width: 100%;
-            max-width: 550px;
+            min-height: 100vh;
+            align-content: center;
+            max-width: 1500px;
             background-color: var(--card-background-1);
-            box-shadow: var(--shadow-1);
-            border-radius: 12px;
-            padding: 2rem;
+            margin: auto;
+            padding: 80px 20px;
         }
 
         /* Typography */
         .form-container h1 {
             color: var(--text-color-1);
-            font-size: 2rem;
+            font-size: 35px;
             font-weight: 700;
-            margin: 0 0 0.5rem;
+            text-align: center;
         }
         .form-container .form-description {
-            margin: 0 0 2rem;
-            font-size: 1rem;
+            font-size: 18px;
+            text-align: center;
         }
 
         /* Form Fields Layout */
         .form-fields {
             display: flex;
             flex-direction: column;
-            gap: 1.25rem;
+            gap: 28px;
         }
         .form-group {
             display: flex;
@@ -136,21 +207,21 @@
         }
         .form-label {
             display: block;
-            font-size: 0.875rem;
+            font-size: 15px;
             font-weight: 500;
-            margin-bottom: 0.5rem;
+            margin-bottom: 6px;
         }
 
         /* Input, Select, Textarea Styles */
         .form-input {
             width: 100%;
-            padding: 0.8rem 1rem;
+            padding: 10px 10px;
             background-color: var(--background-4);
             border: 1px solid var(--background-3);
             color: var(--text-color-1);
             border-radius: 8px;
             transition: all 0.2s ease-in-out;
-            font-size: 1rem;
+            font-size: 17px;
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
@@ -176,12 +247,12 @@
         .checkbox-group {
             display: flex;
             align-items: flex-start;
-            gap: 0.75rem;
+            gap: 10px;
         }
         .checkbox-group input {
             margin-top: 0.2rem;
-            height: 1.1em;
-            width: 1.1em;
+            height: auto;
+            width: auto;
             accent-color: var(--button-background-1);
         }
         .checkbox-group .checkbox-label {
@@ -189,7 +260,7 @@
             color: var(--text-color-1);
         }
         .checkbox-group .checkbox-description {
-            font-size: 0.875rem;
+            font-size: 14px;
             color: var(--text-color-2);
             opacity: 0.9;
         }
@@ -200,7 +271,7 @@
             background-color: var(--button-background-1);
             color: var(--button-text-1);
             font-weight: 700;
-            padding: 0.9rem 1rem;
+            padding: 15px 10px;
             border-radius: 8px;
             border: none;
             cursor: pointer;
@@ -218,10 +289,10 @@
         /* Message Styles */
         .message-box {
             display: none; /* Hidden by default */
-            padding: 1rem;
+            padding: 10px 10px;
             border: 1px solid transparent;
             border-radius: 8px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 15px;
         }
         .message-box.success {
             background-color: var(--success-bg);
@@ -249,7 +320,22 @@
         }
     </style>
 </head>
-<body class=""> <!-- Add "dark-mode" class here to test -->
+<body>
+
+    <header class="navigation-header">
+
+        <nav>
+
+            <div class="branding atikle-multicolor"><a href="https://atikle.github.io/home">atikle</a></div>
+
+        </nav>
+
+    </header>
+
+    <div class="help-centre-foil">
+        <h1>Welcome to atikle Help Centre</h1>
+        <h2>How can we help you?</h1>
+    </div>
 
     <div class="form-container">
         <h1>Get in Touch</h1>
@@ -269,22 +355,22 @@
             <div class="form-fields">
                 <div class="form-group">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" name="name" id="name" required class="form-input" placeholder="John Doe">
+                    <input type="text" name="name" id="name" required class="form-input" placeholder="">
                 </div>
 
                 <div class="form-group">
                     <label for="email" class="form-label">Email Address</label>
-                    <input type="email" name="email" id="email" required pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Please enter a valid email address." class="form-input" placeholder="you@example.com">
+                    <input type="email" name="email" id="email" required pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Please enter a valid email address." class="form-input" placeholder="">
                 </div>
 
                 <div class="form-group">
                     <label for="phone" class="form-label">Phone Number (Optional)</label>
-                    <input type="tel" name="phone" id="phone" pattern="\+?[0-9]{7,15}" title="Enter 7 to 15 digits, optionally starting with a '+'." class="form-input" placeholder="+1 (555) 123-4567">
+                    <input type="tel" name="phone" id="phone" pattern="\+?[0-9]{7,15}" title="Enter 7 to 15 digits, optionally starting with a '+'." class="form-input" placeholder="">
                 </div>
 
                 <div class="form-group">
                     <label for="country" class="form-label">Country</label>
-                    <input type="text" name="country" id="country" class="form-input" placeholder="United States">
+                    <input type="text" name="country" id="country" class="form-input" placeholder="">
                 </div>
                 
                 <div class="form-group">
@@ -308,7 +394,7 @@
 
                 <div class="form-group">
                     <label for="message" class="form-label">Message</label>
-                    <textarea name="message" id="message" rows="4" required class="form-input" placeholder="Your message here..."></textarea>
+                    <textarea name="message" id="message" rows="4" required class="form-input" placeholder=""></textarea>
                 </div>
             </div>
 
@@ -326,7 +412,7 @@
         const errorText = document.getElementById('error-text');
 
         // IMPORTANT: Replace this with your Google Apps Script Web App URL
-        const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyJ1dzMkK-kDR_Ewc9y3R6Gh-JDfVIr-xlrFCvre5NndGilmR8yO-l3g9YqoHdZa-B2/exec';
 
         form.addEventListener('submit', e => {
             e.preventDefault();
