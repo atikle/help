@@ -22,7 +22,7 @@
         gtag('config', 'G-CK745SP72W');
     </script>
 
-    <title>Contact Form | atikle</title>
+    <title>atikle Help Centre</title>
     <link rel="icon" href="https://atikle.github.io/resource/atikle-icon.png" type="image/x-icon">
 
     <style>
@@ -337,141 +337,7 @@
         <h2>How can we help you?</h1>
     </div>
 
-    <div class="form-container">
-        <h1>Get in Touch</h1>
-        <p class="form-description">Fill out the form below, and we'll get back to you soon.</p>
-
-        <!-- Form Submission Message Placeholders -->
-        <div id="success-message" class="message-box success">
-            <strong>Success!</strong>
-            <span class="message-text">Your message has been sent.</span>
-        </div>
-        <div id="error-message" class="message-box error">
-            <strong>Oops!</strong>
-            <span id="error-text">Something went wrong. Please try again.</span>
-        </div>
-
-        <form id="contact-form" novalidate>
-            <div class="form-fields">
-                <div class="form-group">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" name="name" id="name" required class="form-input" placeholder="">
-                </div>
-
-                <div class="form-group">
-                    <label for="email" class="form-label">Email Address</label>
-                    <input type="email" name="email" id="email" required pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Please enter a valid email address." class="form-input" placeholder="">
-                </div>
-
-                <div class="form-group">
-                    <label for="phone" class="form-label">Phone Number (Optional)</label>
-                    <input type="tel" name="phone" id="phone" pattern="\+?[0-9]{7,15}" title="Enter 7 to 15 digits, optionally starting with a '+'." class="form-input" placeholder="">
-                </div>
-
-                <div class="form-group">
-                    <label for="country" class="form-label">Country</label>
-                    <input type="text" name="country" id="country" class="form-input" placeholder="">
-                </div>
-                
-                <div class="form-group">
-                    <label for="product" class="form-label">Product of Interest</label>
-                    <select name="product" id="product" required class="form-input">
-                        <option value="" disabled selected>Select a product</option>
-                        <option value="finatikle">finatikle</option>
-                        <option value="insights">insights</option>
-                        <option value="atikle connect">atikle connect</option>
-                        <option value="connect community">connect community</option>
-                    </select>
-                </div>
-
-                <div class="checkbox-group">
-                    <input id="spam-check" name="spam-check" type="checkbox" required>
-                    <div>
-                        <label for="spam-check" class="checkbox-label">Please confirm you are not a robot.</label>
-                        <p class="checkbox-description">Behind this screen is a real human, hoping to help. A thoughtful message makes our day!</p>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="message" class="form-label">Message</label>
-                    <textarea name="message" id="message" rows="4" required class="form-input" placeholder=""></textarea>
-                </div>
-            </div>
-
-            <button type="submit" id="submit-button" class="submit-button">
-                Send Message
-            </button>
-        </form>
-    </div>
-
-    <script>
-        const form = document.getElementById('contact-form');
-        const submitButton = document.getElementById('submit-button');
-        const successMessage = document.getElementById('success-message');
-        const errorMessage = document.getElementById('error-message');
-        const errorText = document.getElementById('error-text');
-
-        // IMPORTANT: Replace this with your Google Apps Script Web App URL
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyEZcPrvw89KDxMS4Ajmzg_IQzrPI0sja2ynr4YAw4wmwy1JEuDmEg2OqwFImHmw4jQ/exec';
-
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-
-            // --- Start Validation ---
-            const emailInput = document.getElementById('email');
-            const phoneInput = document.getElementById('phone');
-            const spamCheck = document.getElementById('spam-check');
-            
-            // Clear previous messages
-            successMessage.classList.remove('show');
-            errorMessage.classList.remove('show');
-
-            // Check spam checkbox
-            if (!spamCheck.checked) {
-                errorText.textContent = 'Please check the box to confirm you are not a robot.';
-                errorMessage.classList.add('show');
-                return;
-            }
-
-            // Check email validity
-            if (!emailInput.checkValidity()) {
-                errorText.textContent = emailInput.title || 'Please enter a valid email address.';
-                errorMessage.classList.add('show');
-                return;
-            }
-            
-            // Check phone validity (only if a value is entered)
-            if (phoneInput.value && !phoneInput.checkValidity()) {
-                errorText.textContent = phoneInput.title || 'Please enter a valid phone number.';
-                errorMessage.classList.add('show');
-                return;
-            }
-            // --- End Validation ---
-
-            submitButton.disabled = true;
-            submitButton.textContent = 'Sending...';
-
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => {
-                    if (response.ok) return response.json();
-                    throw new Error('Network response was not ok.');
-                })
-                .then(data => {
-                    console.log('Success!', data);
-                    successMessage.classList.add('show');
-                    form.reset();
-                })
-                .catch(error => {
-                    console.error('Error!', error.message);
-                    errorText.textContent = 'Something went wrong. Please try again later.';
-                    errorMessage.classList.add('show');
-                })
-                .finally(() => {
-                    submitButton.disabled = false;
-                    submitButton.textContent = 'Send Message';
-                });
-        });
-    </script>
+    <a href="https://atikle.github.io/help/contact/form">Contacts Us</a>
 
 </body>
 </html>
