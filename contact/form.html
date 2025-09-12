@@ -8,8 +8,6 @@
 
     <script defer src="https://atikle.github.io/framework/universal/theme.js"></script>
     <script defer src="https://atikle.github.io/framework/universal/script.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     
     <script>
         $(function() {
@@ -149,7 +147,8 @@
             text-align: center;
         }
 
-        /* Form Container */
+
+
         .form-container {
             width: 100%;
             min-height: 100vh;
@@ -160,7 +159,6 @@
             padding: 80px 20px;
         }
 
-        /* Typography */
         .form-container h1 {
             color: var(--text-color-1);
             font-size: 35px;
@@ -172,7 +170,6 @@
             text-align: center;
         }
 
-        /* Form Fields Layout */
         .form-fields {
             display: flex;
             flex-direction: column;
@@ -189,7 +186,6 @@
             margin-bottom: 6px;
         }
 
-        /* Input, Select, Textarea Styles */
         .form-input {
             width: 100%;
             padding: 10px 10px;
@@ -203,15 +199,18 @@
             -moz-appearance: none;
             appearance: none;
         }
+
         .form-input:focus {
             outline: none;
             border-color: var(--button-background-1);
             box-shadow: 0 0 0 3px rgba(var(--button-background-1), 0.2);
         }
+        
         .form-input::placeholder {
             color: var(--text-color-2);
             opacity: 0.7;
         }
+
         select.form-input {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
             background-position: right 0.7rem center;
@@ -220,29 +219,30 @@
             padding-right: 2.5rem;
         }
         
-        /* Checkbox Styles */
         .checkbox-group {
             display: flex;
             align-items: flex-start;
             gap: 10px;
         }
+
         .checkbox-group input {
             margin-top: 0.2rem;
             height: auto;
             width: auto;
             accent-color: var(--button-background-1);
         }
+
         .checkbox-group .checkbox-label {
             font-weight: 500;
             color: var(--text-color-1);
         }
+
         .checkbox-group .checkbox-description {
             font-size: 14px;
             color: var(--text-color-2);
             opacity: 0.9;
         }
 
-        /* Submit Button */
         .submit-button {
             width: 100%;
             background-color: var(--button-background-1);
@@ -255,15 +255,16 @@
             transition: transform 0.2s, opacity 0.2s;
             margin-top: 1rem;
         }
+
         .submit-button:hover {
             opacity: 0.9;
         }
+
         .submit-button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
         }
 
-        /* Message Styles */
         .message-box {
             display: none; /* Hidden by default */
             padding: 10px 10px;
@@ -271,19 +272,23 @@
             border-radius: 8px;
             margin-bottom: 15px;
         }
+        
         .message-box.success {
             background-color: var(--success-bg);
             border-color: var(--success-border);
             color: var(--success-text);
         }
+
         .message-box.error {
             background-color: var(--error-bg);
             border-color: var(--error-border);
             color: var(--error-text);
         }
+
         .message-box.show {
             display: block;
         }
+        
         .message-box strong {
             display: block;
             margin-bottom: 0.25rem;
@@ -379,8 +384,7 @@
         const errorMessage = document.getElementById('error-message');
         const errorText = document.getElementById('error-text');
 
-        // IMPORTANT: Replace this with your Google Apps Script Web App URL
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxAPIt-kLlpXvKsQqOwWQqnQsIMVjXiGa_Itef0AAGINzU7ToWAn9-1QldAWJkzMdgJ/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbw4-2hq5YdnN0spJLx3-July2Z-5AVk6Ssieajev3VOwi8fNNlYiOuXRvGkkdEh6uYb/exec';
 
         form.addEventListener('submit', e => {
             e.preventDefault();
