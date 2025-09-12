@@ -3,10 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <script defer src="https://atikle.github.io/framework/universal/theme.js"></script>
     <script defer src="https://atikle.github.io/framework/universal/script.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+    <script>
+        $(function() {
+            // Ensure the path is correct relative to your HTML files
+            $("#navbar-placeholder").load("https://atikle.github.io/framework/navbar-1/index.html");
+        });
+    </script>
     
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="https://atikle.github.io/framework/universal/brand.css">
@@ -97,46 +107,13 @@
         *, *::before, *::after {
             box-sizing: border-box;
         }
+        
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--background-2);
+            background-color: var(--background-1);
             color: var(--text-color-2);
             margin: 0;
             min-height: 100vh;
-        }
-        
-        .navigation-header {
-            position: fixed;
-            background-color: var(--navbar-background-1);
-            /* padding: 0px 10px; */
-            height: 66px;
-            width: 100%;
-            top: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000; /* Ensure navbar is on top */
-            will-change: transform, box-shadow;
-        }
-
-        nav {
-            width: 95%;
-            border-radius: 10px;
-            /* max-width: 1650px; */
-            max-width: 1725px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .branding {
-            width: 300px;
-            left: 0;
-            font-size: 40px;
-            font-weight: 600;
-
-            padding-left: 5px;
-            z-index: 1001; /* Above mobile menu */
         }
 
         .help-centre-foil {
@@ -321,16 +298,7 @@
     </style>
 </head>
 <body>
-
-    <header class="navigation-header">
-
-        <nav>
-
-            <div class="branding atikle-multicolor"><a href="https://atikle.github.io/home">atikle</a></div>
-
-        </nav>
-
-    </header>
+    <div id="navbar-placeholder"></div>
 
     <div class="help-centre-foil">
         <h1>Welcome to atikle Help Centre</h1>
