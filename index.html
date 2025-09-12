@@ -7,6 +7,15 @@
 
     <script defer src="https://atikle.github.io/framework/universal/theme.js"></script>
     <script defer src="https://atikle.github.io/framework/universal/script.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+    <script>
+        $(function() {
+            // Ensure the path is correct relative to your HTML files
+            $("#navbar-placeholder").load("https://atikle.github.io/framework/navbar-1/index.html");
+        });
+    </script>
     
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="https://atikle.github.io/framework/universal/brand.css">
@@ -35,46 +44,13 @@
         *, *::before, *::after {
             box-sizing: border-box;
         }
+        
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--background-2);
             color: var(--text-color-2);
             margin: 0;
-            min-height: 100vh;
-        }
-        
-        .navigation-header {
-            position: fixed;
-            background-color: var(--navbar-background-1);
-            /* padding: 0px 10px; */
-            height: 66px;
-            width: 100%;
-            top: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000; /* Ensure navbar is on top */
-            will-change: transform, box-shadow;
-        }
-
-        nav {
-            width: 95%;
-            border-radius: 10px;
-            /* max-width: 1650px; */
-            max-width: 1725px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .branding {
-            width: 300px;
-            left: 0;
-            font-size: 40px;
-            font-weight: 600;
-
-            padding-left: 5px;
-            z-index: 1001; /* Above mobile menu */
+            min-height: calc(100vh - 66px);
         }
 
         .help-centre-foil {
@@ -110,62 +86,196 @@
             text-align: center;
         }
 
+        .help-centre-label-1 {
+            width: 90%;
+            max-width: 1460px;
+            margin: auto;
+            padding-top: 100px;
+            padding-bottom: 10px;
+            color: white;
+            border-bottom: 2px solid silver;
+            font-size: 25px;
+            font-weight: 500;
+            line-height: 25px;
+        }
+
 
 
         .help-options-container {
             width: 100%;
-            max-width: 1200px;
-            min-height: auto;
+            max-width: 1500px;
+            height: auto;
             margin: auto;
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            gap: 30px;
+            gap: 40px;
             background-color: var(--background-1);
-            padding: 80px 20px;
+            padding: 50px 20px;
         }
 
         .help-options-pill {
             flex: 30%;
             min-width: 300px;
             align-content: center;
-            color: var(--text-color-1);
             background-color: var(--background-1);
-            border: 1px solid gray;
-            border-top: 5px solid crimson;
-            padding: 40px 20px;
+            box-shadow: var(--shadow-1);
+            border-left: 1px solid gray;
+            border-right: 1px solid gray;
+            border-bottom: 1px solid gray;
+            border-top: 4px solid;
+            padding: 50px 20px;
+
+            cursor: pointer;
+            transition: color 0.4s ease; /* Smooth transition for the text color */
+
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .help-options-pill h3 {
+            color: var(--text-color-1);
+            position: relative; /* Needed to set a z-index */
+            z-index: 2; /* Keeps the text on top of the ::before overlay */
+            margin: 0;
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .help-options-pill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            transform: scaleY(0); /* Initially, the overlay is scaled down to zero height, making it invisible */
+            transform-origin: top; /* Sets the origin of the transform to the top edge, making it roll down */
+            transition: transform 0.4s cubic-bezier(0.5, 1, 0.89, 1); /* The animation for the transform property */
+            z-index: -1; /* Places the overlay behind the div's actual content */
+        }
+
+        .help-options-pill:hover::before {
+            transform: scaleY(1); /* On hover, scale the overlay back to its full height (100%) */
+        }
+
+
+
+        .help-pill-1 {
+            border-top-color: cadetblue;
+        }
+        .help-pill-1::before {
+            background-color: cadetblue;
+        }
+
+        .help-pill-2 {
+            border-top-color: #007bff;
+        }
+        .help-pill-2::before {
+            background-color: #007bff;
+        }
+
+        .help-pill-3 {
+            border-top-color: navajowhite;
+        }
+        .help-pill-3::before {
+            background-color: navajowhite;
+        }
+
+        .help-pill-4 {
+            border-top-color: #7d3c98;
+        }
+        .help-pill-4::before {
+            background-color: #7d3c98;
+        }
+
+        .help-pill-5 {
+            border-top-color: gray;
+        }
+        .help-pill-5::before {
+            background-color: gray;
+        }
+
+        .help-pill-6 {
+            border-top-color: #52c882;
+        }
+        .help-pill-6::before {
+            background-color: #52c882;
+        }
+
+        .help-pill-7 {
+            border-top-color: #29487d;
+        }
+        .help-pill-7::before {
+            background-color: #29487d;
+        }
+
+        .help-pill-8 {
+            border-top-color: rosybrown;
+        }
+        .help-pill-8::before {
+            background-color: rosybrown;
+        }
+
+        .help-pill-9 {
+            border-top-color: powderblue;
+        }
+        .help-pill-9::before {
+            background-color: powderblue;
         }
     </style>
 </head>
 <body>
 
-    <header class="navigation-header">
-
-        <nav>
-
-            <div class="branding atikle-multicolor"><a href="https://atikle.github.io/home">atikle</a></div>
-
-        </nav>
-
-    </header>
+    <div id="navbar-placeholder"></div>
 
     <div class="help-centre-foil">
         <h1>Welcome to atikle Help Centre</h1>
         <h2>How can we help you?</h1>
     </div>
 
+    <div class="help-centre-label-1">
+        Quick actions
+    </div>
+
     <div class="help-options-container">
-        <a class="help-options-pill" href="https://atikle.github.io/help/contact/form">Contacts Us</a>
-        <a class="help-options-pill" href="https://atikle.github.io/help/contact/form">Contacts Us</a>
-        <a class="help-options-pill" href="https://atikle.github.io/help/contact/form">Contacts Us</a>
-        
-        <a class="help-options-pill" href="https://atikle.github.io/help/contact/form">Contacts Us</a>
-        <a class="help-options-pill" href="https://atikle.github.io/help/contact/form">Contacts Us</a>
-        <a class="help-options-pill" href="https://atikle.github.io/help/contact/form">Contacts Us</a>
-        
-        <a class="help-options-pill" href="https://atikle.github.io/help/contact/form">Contacts Us</a>
-        <a class="help-options-pill" href="https://atikle.github.io/help/contact/form">Contacts Us</a>
-        <a class="help-options-pill" href="https://atikle.github.io/help/contact/form">Contacts Us</a>
+        <a class="help-options-pill help-pill-1" href="https://atikle.github.io/help/contact/form">
+            <h3>Contacts Us</h3>
+        </a>
+
+        <a class="help-options-pill help-pill-2" href="https://atikle.github.io/help/contact/form">
+            <h3>Report errors in finatikle</h3>
+        </a>
+
+        <a class="help-options-pill help-pill-3" href="https://atikle.github.io/help/contact/form">
+            <h3>Report errors in insights</h3>
+        </a>
+
+        <a class="help-options-pill help-pill-4" href="https://atikle.github.io/help/contact/form">
+            <h3>Report activity on atikle connect</h3>
+        </a>
+
+        <a class="help-options-pill help-pill-5" href="https://atikle.github.io/help/contact/form">
+            <h3>Flag webinar</h3>
+        </a>
+
+        <a class="help-options-pill help-pill-6" href="https://atikle.github.io/help/contact/form">
+            <h3>Update Community profile</h3>
+        </a>
+
+        <a class="help-options-pill help-pill-7" href="https://atikle.github.io/help/contact/form">
+            <h3>Safety Issue</h3>
+        </a>
+
+        <a class="help-options-pill help-pill-8" href="https://atikle.github.io/help/contact/form">
+            <h3>Update account details</h3>
+        </a>
+
+        <a class="help-options-pill help-pill-9" href="https://atikle.github.io/help/contact/form">
+            <h3>Become member</h3>
+        </a>
     </div>
 
 </body>
