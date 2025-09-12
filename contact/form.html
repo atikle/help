@@ -9,13 +9,6 @@
     <script defer src="https://atikle.github.io/framework/universal/theme.js"></script>
     <script defer src="https://atikle.github.io/framework/universal/script.js"></script>
     
-    <script>
-        $(function() {
-            // Ensure the path is correct relative to your HTML files
-            $("#navbar-placeholder").load("https://atikle.github.io/framework/navbar-1/index.html");
-        });
-    </script>
-    
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="https://atikle.github.io/framework/universal/brand.css">
     <link rel="stylesheet" href="https://atikle.github.io/framework/universal/style.css">
@@ -328,22 +321,22 @@
             <div class="form-fields">
                 <div class="form-group">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" name="name" id="name" required class="form-input" placeholder="">
+                    <input type="text" name="name" id="name" required class="form-input">
                 </div>
 
                 <div class="form-group">
                     <label for="email" class="form-label">Email Address</label>
-                    <input type="email" name="email" id="email" required pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Please enter a valid email address." class="form-input" placeholder="">
+                    <input type="email" name="email" id="email" required pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Please enter a valid email address." class="form-input">
                 </div>
 
                 <div class="form-group">
                     <label for="phone" class="form-label">Phone Number (Optional)</label>
-                    <input type="tel" name="phone" id="phone" pattern="\+?[0-9]{7,15}" title="Enter 7 to 15 digits, optionally starting with a '+'." class="form-input" placeholder="">
+                    <input type="tel" name="phone" id="phone" pattern="\+?[0-9]{7,15}" title="Enter 7 to 15 digits, optionally starting with a '+'." class="form-input" placeholder="+1 (555) 123-4567">
                 </div>
 
                 <div class="form-group">
                     <label for="country" class="form-label">Country</label>
-                    <input type="text" name="country" id="country" class="form-input" placeholder="">
+                    <input type="text" name="country" id="country" class="form-input">
                 </div>
                 
                 <div class="form-group">
@@ -367,7 +360,7 @@
 
                 <div class="form-group">
                     <label for="message" class="form-label">Message</label>
-                    <textarea name="message" id="message" rows="4" required class="form-input" placeholder=""></textarea>
+                    <textarea name="message" id="message" rows="4" required class="form-input"></textarea>
                 </div>
             </div>
 
@@ -375,6 +368,7 @@
                 Send Message
             </button>
         </form>
+
     </div>
 
     <script>
@@ -384,7 +378,8 @@
         const errorMessage = document.getElementById('error-message');
         const errorText = document.getElementById('error-text');
 
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbw4-2hq5YdnN0spJLx3-July2Z-5AVk6Ssieajev3VOwi8fNNlYiOuXRvGkkdEh6uYb/exec';
+        // IMPORTANT: Replace this with your Google Apps Script Web App URL
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwkopIsbThMH49liNxvsT4jqVIETGncS9wHmbpmwUBI9VQ07TpyZo2t9xnboJZsy3AW/exec';
 
         form.addEventListener('submit', e => {
             e.preventDefault();
