@@ -8,6 +8,15 @@
 
     <script defer src="https://atikle.github.io/framework/universal/theme.js"></script>
     <script defer src="https://atikle.github.io/framework/universal/script.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+    <script>
+        $(function() {
+            // Ensure the path is correct relative to your HTML files
+            $("#navbar-placeholder").load("https://atikle.github.io/framework/navbar-1/index.html");
+        });
+    </script>
     
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="https://atikle.github.io/framework/universal/brand.css">
@@ -27,27 +36,7 @@
     <link rel="icon" href="https://atikle.github.io/resource/atikle-icon.png" type="image/x-icon">
 
     <style>
-        /* Light Mode / Default Variables */
         :root {
-            --background-1: #f3f4f6;
-            --background-2: #ffffff;
-            --background-3: #d1d5db;
-            --background-4: #f9fafb;
-            --background-5: #e5e7eb;
-            --card-background-1: #ffffff;
-            --card-background-2: #f9fafb;
-            --text-color-1: #111827;
-            --text-color-2: #4b5563;
-            --text-color-3: #ffffff;
-            --shadow-1: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-2: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            --link-color: #1d4ed8;
-            --button-background-1: #2563eb;
-            --button-background-2: #e5e7eb;
-            --button-background-3: #1d4ed8;
-            --button-text-1: #ffffff;
-            --button-text-2: #111827;
-            --button-text-3: #ffffff;
             --hover-overlay: rgba(0, 0, 0, 0.04);
             --success-bg: #dcfce7;
             --success-border: #4ade80;
@@ -57,27 +46,7 @@
             --error-text: #b91c1c;
         }
 
-        /* User's Dark Mode Variables */
         body.dark-mode {
-            --background-1: black;
-            --background-2: black;
-            --background-3: #4b5563; /* Adjusted for better visibility */
-            --background-4: #242526;
-            --background-5: #18191a;
-            --card-background-1: #242526;
-            --card-background-2: #242526;
-            --text-color-1: white;
-            --text-color-2: #b0b3b8;
-            --text-color-3: black;
-            --shadow-1: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
-            --shadow-2: 0 2px 8px rgba(0, 0, 0, 0.25);
-            --link-color: #c0c1c5;
-            --button-background-1: #2d88ff;
-            --button-background-2: #3a3b3c;
-            --button-background-3: #6f74ff;
-            --button-text-1: #ffffff;
-            --button-text-2: #e4e6eb;
-            --button-text-3: #ffffff;
             --hover-overlay: rgba(255, 255, 255, 0.08);
             --success-bg: #14532d;
             --success-border: #22c55e;
@@ -183,10 +152,11 @@
             width: 100%;
             padding: 10px 10px;
             background-color: var(--background-4);
-            border: 1px solid var(--background-3);
+            border: 1px solid gray;
             color: var(--text-color-1);
             border-radius: 8px;
             transition: all 0.2s ease-in-out;
+            font-family: 'Roboto', sans-serif;
             font-size: 17px;
             -webkit-appearance: none;
             -moz-appearance: none;
@@ -304,13 +274,13 @@
     </div>
 
     <div class="form-container">
-        <h1>Get in Touch</h1>
+        <h1>Contact Us</h1>
         <p class="form-description">Fill out the form below, and we'll get back to you soon.</p>
 
         <!-- Form Submission Message Placeholders -->
         <div id="success-message" class="message-box success">
             <strong>Success!</strong>
-            <span class="message-text">Your message has been sent.</span>
+            <span class="message-text">Your message has been sent. A confirmation copy has been sent to your email.</span>
         </div>
         <div id="error-message" class="message-box error">
             <strong>Oops!</strong>
