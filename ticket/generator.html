@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atikle Help Centre - New Ticket</title>
+    <style>
+        :root {
+            --background-1: white;
+            --background-2: whitesmoke;
+            --background-3: black;
+            --background-4: #f0f2f5;
+            --background-5: #eaebf5;
+            --card-background-1: white;
+            --card-background-2: whitesmoke;
+            --text-color-1: #050505;
+            --text-color-2: #65676b;
+            --text-color-3: white;
+            --shadow-1: 0 2px 6px 0 rgba(136, 148, 171, 0.2), 0 24px 20px -24px rgba(71, 82, 107, 0.1);
+            --shadow-2: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --button-background-1: #1877f2;
+            --button-background-2: #e4e6eb;
+            --button-background-3: #3d42df;
+            --button-text-1: #ffffff;
+            --button-text-2: #050505;
+            --button-text-3: #ffffff;
+            --hover-overlay: rgba(0, 0, 0, 0.05);
+            --success-color: #4CAF50;
+            --error-color: #F44336;
+        }
+
+        /* A dark mode can be added later if needed by uncommenting this section */
+        /*
+        body.dark-mode {
+            --navbar-background-1: #242526;
+            --background-1: black;
+            --background-2: black;
+            --background-3: white;
+            --background-4: #242526;
+            --background-5: #18191a;
+            --card-background-1: #242526;
+            --card-background-2: #242526;
+            --text-color-1: white;
+            --text-color-2: #b0b3b8;
+            --text-color-3: black;
+            --shadow-1: 0px 0px 8px 0px #282b33;
+            --shadow-2: 0 2px 8px rgba(0, 0, 0, 0.25);
+            --button-background-1: #2d88ff;
+            --button-background-2: #3a3b3c;
+            --button-background-3: #6f74ff;
+            --button-text-1: #ffffff;
+            --button-text-2: #e4e6eb;
+            --button-text-3: #ffffff;
+            --hover-overlay: rgba(255, 255, 255, 0.08);
+        }
+        */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--background-4);
+            color: var(--text-color-1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: var(--card-background-1);
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--text-color-1);
+            font-size: 28px;
+        }
+
+        p {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--text-color-2);
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color-2);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: var(--background-5);
+            color: var(--text-color-1);
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--button-background-3);
+            box-shadow: 0 0 0 3px rgba(61, 66, 223, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--button-background-3);
+            color: var(--button-text-3);
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .submit-btn:hover {
+            background-color: #2a2ed2;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .submit-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .message {
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Support Ticket System</h1>
+        <p>Please fill out the form below, and we will get back to you shortly.</p>
+        
+        <div id="message-container"></div>
+
+        <form id="ticket-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number (Optional)</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country" required>
+            </div>
+            <div class="form-group">
+                <label for="product">Product/Service</label>
+                <select id="product" name="product" required>
+                    <option value="" disabled selected>Select a product...</option>
+                    <option value="General Inquiry">General Inquiry</option>
+                    <option value="Product A">Product A</option>
+                    <option value="Product B">Product B</option>
+                    <option value="Service X">Service X</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="issue">Describe your issue</label>
+                <textarea id="issue" name="issue" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn" id="submit-button">
+                <span id="button-text">Generate Ticket</span>
+                <div class="spinner" id="spinner" style="display: none;"></div>
+            </button>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('ticket-form');
+        const submitButton = document.getElementById('submit-button');
+        const buttonText = document.getElementById('button-text');
+        const spinner = document.getElementById('spinner');
+        const messageContainer = document.getElementById('message-container');
+
+        // IMPORTANT: Replace this with your own Google Apps Script Web App URL
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyqiUXmwPvDrbbLbrnonbHQRzHkgJHnpZ5s6bw7oCRSzMOQuvCSoEmWZtmQeUxXEbl7/exec';
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+                displayMessage('Please set up the Google Apps Script URL first.', 'error');
+                return;
+            }
+
+            // --- UI Loading State ---
+            submitButton.disabled = true;
+            buttonText.textContent = 'Submitting...';
+            spinner.style.display = 'block';
+            messageContainer.innerHTML = '';
+
+            try {
+                const formData = new FormData(form);
+                const data = {};
+                formData.forEach((value, key) => {
+                    data[key] = value;
+                });
+                
+                // The ticket number is now generated on the server (Apps Script) side
+                // to ensure it's logged correctly even if the client disconnects.
+
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'cors', // Required for cross-origin requests
+                    redirect: 'follow', // Follow redirects, Apps Script uses this
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'text/plain;charset=utf-8', // Use text/plain to avoid CORS preflight
+                    },
+                });
+
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    form.reset();
+                    form.style.display = 'none';
+                    displayMessage(`<strong>Success!</strong> Ticket has been created. Ticket number is: <strong>${result.ticketNumber}</strong>. A confirmation email has been sent on email.`, 'success');
+                } else {
+                    throw new Error(result.message || 'An unknown error occurred.');
+                }
+
+            } catch (error) {
+                console.error('Submission Error:', error);
+                displayMessage(`An error occurred: ${error.message}. Please try again.`, 'error');
+            } finally {
+                // --- Reset UI State ---
+                submitButton.disabled = false;
+                buttonText.textContent = 'Generate Ticket';
+                spinner.style.display = 'none';
+            }
+        });
+
+        function displayMessage(message, type) {
+            messageContainer.innerHTML = `<div class="message ${type}">${message}</div>`;
+        }
+    </script>
+
+</body>
+</html>
