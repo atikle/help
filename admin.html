@@ -83,9 +83,9 @@
 
         /* Login Page styles */
         .login-page {
-            display: flex;
+            /* display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: center; */
             min-height: 100vh;
             /* background-color: var(--background-4); */
             background-image: url(https://atikle.github.io/resource/admin-login-bg.png);
@@ -94,7 +94,7 @@
             user-select: none;
         }
 
-        .login-card {
+        /* .login-card {
             background-color: var(--card-background-1);
             padding: 40px;
             border-radius: 12px;
@@ -102,6 +102,19 @@
             width: 100%;
             max-width: 400px;
             text-align: center;
+        } */
+        .login-card {
+            background-color: var(--card-background-1);
+            padding: 40px;
+            border-radius: 0px;
+            box-shadow: var(--shadow-1);
+            float: inline-end;
+            width: 25%;
+            height: 100vh;
+            min-width: 400px;
+            max-width: 500px;
+            text-align: center;
+            align-content: center;
         }
 
         @media screen and (max-width: 600px) {
@@ -131,7 +144,7 @@
         }
         
         .login-logo {
-            width: 120px;
+            width: 150px;
             /* margin-bottom: 24px; */
             margin-top: 30px;
             margin-bottom: 60px;
@@ -696,7 +709,7 @@
             </form>
             <div id="error-message">Invalid username or password.</div>
         </div>
-        <p style="position: fixed; bottom: 10px; left: 10px; color: white;">atikle Admin Console v1.1</p>
+        <p style="position: fixed; bottom: 10px; left: 10px; color: white; font-size: 10px; ">atikle Single Sign-On Admin Console v1.1</p>
     </div>
 
     <!-- MAIN ADMIN CONSOLE -->
