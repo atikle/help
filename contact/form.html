@@ -152,7 +152,8 @@
             width: 100%;
             padding: 10px 10px;
             background-color: var(--background-4);
-            border: 1px solid gray;
+            /* border: 1px solid gray; */
+            border: 1px solid transparent;
             color: var(--text-color-1);
             border-radius: 8px;
             transition: all 0.2s ease-in-out;
@@ -166,7 +167,7 @@
         .form-input:focus {
             outline: none;
             border-color: var(--button-background-1);
-            box-shadow: 0 0 0 3px rgba(var(--button-background-1), 0.2);
+            /* box-shadow: 0 0 0 3px rgba(var(--button-background-1), 0.2); */
         }
         
         .form-input::placeholder {
@@ -206,7 +207,36 @@
             opacity: 0.9;
         }
 
+        /* --- Submit Button --- */
         .submit-button {
+            width: 100%;
+            background-color: var(--button-background-1);
+            color: var(--button-text-1);
+            font-weight: 600; /* Slightly less bold */
+            font-size: 1rem;
+            padding: 14px 10px; /* Adjusted padding */
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            margin-top: 1.5rem;
+        }
+
+        .submit-button:hover:not(:disabled) {
+            /* Instead of opacity, let's use filter for a cleaner look */
+            filter: brightness(1.1);
+        }
+        
+        .submit-button:active:not(:disabled) {
+            transform: scale(0.99); /* Click effect */
+        }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* .submit-button {
             width: 100%;
             background-color: var(--button-background-1);
             color: var(--button-text-1);
@@ -226,10 +256,42 @@
         .submit-button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
-        }
+        } */
 
+        /* --- Message Boxes --- */
         .message-box {
             display: none; /* Hidden by default */
+            padding: 1rem; /* More padding */
+            border: 1px solid transparent;
+            border-radius: 8px;
+            margin-bottom: 1.5rem; /* Space */
+            font-size: 0.95rem;
+        }
+        
+        .message-box.success {
+            background-color: var(--success-bg);
+            border-color: var(--success-border);
+            color: var(--success-text);
+        }
+
+        .message-box.error {
+            background-color: var(--error-bg);
+            border-color: var(--error-border);
+            color: var(--error-text);
+        }
+
+        .message-box.show {
+            display: block;
+        }
+        
+        .message-box strong {
+            display: block;
+            margin-bottom: 0.35rem;
+            font-weight: 600;
+        }
+
+        /* .message-box {
+            display: none;
             padding: 10px 10px;
             border: 1px solid transparent;
             border-radius: 8px;
@@ -255,7 +317,7 @@
         .message-box strong {
             display: block;
             margin-bottom: 0.25rem;
-        }
+        } */
 
         /* Responsive Design */
         @media (min-width: 640px) {
