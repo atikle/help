@@ -3,55 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>atikle Help Centre</title>
+    <link rel="icon" href="https://atikle.github.io/resource/atikle-icon.png" type="image/x-icon">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-    <script defer src="https://atikle.github.io/framework/universal/theme.js"></script>
-    <script defer src="https://atikle.github.io/framework/universal/script.js"></script>
     <link rel="stylesheet" href="https://atikle.github.io/framework/universal/brand.css">
     <link rel="stylesheet" href="https://atikle.github.io/framework/universal/style.css">
     <link rel="stylesheet" href="home.css">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script defer src="https://atikle.github.io/framework/universal/theme.js"></script>
+    <script defer src="https://atikle.github.io/framework/universal/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CK745SP72W"></script>
 
     <script>
         $(function() {
             $("#navbar-placeholder").load("https://atikle.github.io/framework/navbar-1/index.html");
         });
-    </script>
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CK745SP72W"></script>
-    <script>
+
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-CK745SP72W');
     </script>
 
-    <title>atikle Help Centre</title>
-    <link rel="icon" href="https://atikle.github.io/resource/atikle-icon.png" type="image/x-icon">
-
     <style>
-        /* --- LOCAL COMPONENT VARIABLES --- */
-        /* These handle the specific gradients/transparency not found in your global CSS */
         :root {
-            --hc-gradient: linear-gradient(to right, #FFAFBD, #C9FFBF);
             --hc-glass-bg: rgba(255, 255, 255, 0.6);
             --hc-glass-border: rgba(255, 255, 255, 0.8);
             --hc-shortcut-bg: rgba(255, 255, 255, 0.5);
         }
 
-        /* Dark Mode overrides for local variables */
         body.dark-mode {
-            /* Midnight gradient for dark mode so it isn't too bright */
-            --hc-gradient: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-            /* Translucent version of your --card-background-1 (#242526) */
             --hc-glass-bg: rgba(36, 37, 38, 0.75);
             --hc-glass-border: rgba(255, 255, 255, 0.1);
             --hc-shortcut-bg: rgba(255, 255, 255, 0.1);
         }
 
-        /* --- BASE STYLES --- */
         body {
             background-color: var(--background-1);
             color: var(--text-color-1);
@@ -63,7 +52,6 @@
         a { text-decoration: none; -webkit-tap-highlight-color: transparent; }
         *, *::before, *::after { box-sizing: border-box; }
 
-        /* --- HEADER FOIL --- */
         .help-centre-foil {
             margin-top: 66px;
             width: 100%;
@@ -71,29 +59,24 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: var(--hc-gradient);
+            background: linear-gradient(to right, #FFAFBD, #C9FFBF);
             transition: background 0.5s ease;
         }
 
         .help-centre-foil h1 {
-            color: #050505; /* Always dark on the pastel gradient in Light Mode */
+            color: black;
             font-size: 35px; font-weight: 700;
             line-height: 35px; margin-bottom: 10px;
         }
         
         .help-centre-foil h2 {
-            color: rgba(0,0,0, 0.7);
+            color: gray;
             font-size: 25px; font-weight: 500;
             line-height: 25px; margin-top: 0;
         }
 
-        /* Dark mode text adjustment for the header foil */
-        body.dark-mode .help-centre-foil h1 { color: white; }
-        body.dark-mode .help-centre-foil h2 { color: rgba(255,255,255,0.8); }
-
-        /* --- SEARCH CONTAINER --- */
         .search-container {
-            max-width: 620px;
+            max-width: 820px;
             margin: 40px auto 0;
             position: relative;
             z-index: 50;
@@ -133,7 +116,6 @@
         #helpSearch::placeholder { color: var(--text-color-2); font-weight: 400; }
         .search-icon-svg { color: var(--text-color-2); }
 
-        /* Shortcut Hint (/) */
         .shortcut-hint {
             border: 1px solid var(--text-color-2);
             border-radius: 4px;
@@ -144,11 +126,13 @@
             pointer-events: none;
         }
 
-        /* Clear Button */
         .clear-btn {
             display: none;
             cursor: pointer;
-            padding: 4px;
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 3px;
+            padding-bottom: 1px;
             border-radius: 50%;
             background: var(--button-background-2);
             color: var(--text-color-2);
@@ -157,13 +141,12 @@
         }
         .clear-btn:hover { background: var(--hover-overlay); color: var(--text-color-1); }
 
-        /* --- SEARCH DROPDOWN --- */
         .search-results-glass {
             position: absolute;
             top: calc(100% + 12px);
             left: 0;
             right: 0;
-            background: var(--card-background-1); /* Uses your global card color */
+            background: var(--card-background-1);
             border-radius: 16px;
             border: 1px solid var(--hover-overlay);
             display: none;
@@ -199,7 +182,6 @@
         .suggestion-title { font-weight: 600; font-size: 0.95rem; display: block; color: var(--text-color-1); }
         .suggestion-desc { font-size: 0.8rem; color: var(--text-color-2); margin-top: 2px; display: block; }
 
-        /* Highlight Logic */
         .highlight {
             color: var(--button-background-1);
             background: rgba(24, 119, 242, 0.1);
@@ -216,16 +198,15 @@
             gap: 10px;
         }
 
-        /* --- QUICK ACTIONS SECTION --- */
         .section-header {
-            max-width: 1200px;
-            margin: 60px auto 20px;
+            max-width: 1250px;
+            margin: 60px auto 30px;
             padding: 0 20px;
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        .section-header h2 { font-size: 1.5rem; color: var(--text-color-1); margin: 0; }
+        .section-header h2 { font-size: 1.75rem; color: var(--text-color-1); margin: 0; }
         .section-header::after { content: ""; flex: 1; height: 1px; background: var(--background-4); }
 
         .help-options-container {
@@ -269,17 +250,15 @@
         .help-options-pill h3 { font-size: 1.1rem; color: var(--text-color-1); margin: 0; font-weight: 600; }
         .help-options-pill p { font-size: 0.9rem; color: var(--text-color-2); margin: 0; line-height: 1.5; }
 
-        /* Card Accents */
         .pill-contact { --accent-color: #007bff; }
         .pill-report { --accent-color: cadetblue; }
-        .pill-community { --accent-color: #7d3c98; }
-        .pill-safety { --accent-color: #29487d; }
+        .pill-community { --accent-color: #29487d; }
+        .pill-safety { --accent-color: #7d3c98; }
         .pill-member { --accent-color: #52c882; }
-        .pill-account { --accent-color: rosybrown; }
+        .pill-account { --accent-color: #007bff; }
 
         .help-options-pill:hover { border-color: var(--accent-color); }
         .help-options-pill:hover .icon-box { background: var(--accent-color); color: white; }
-
     </style>
 </head>
 <body>
@@ -292,9 +271,9 @@
         <div class="search-container">
             <div class="search-glass-box">
                 <i data-lucide="search" class="search-icon-svg" style="opacity: 0.5;"></i>
-                <input type="text" id="helpSearch" placeholder="Search for answers..." autocomplete="off">
+                <input type="text" id="helpSearch" placeholder="Search our help knowledge base" autocomplete="off" aria-label="Search Help Centre">
                 <div class="shortcut-hint" id="shortcutHint">/</div>
-                <div class="clear-btn" id="clearSearch"><i data-lucide="x" style="width: 14px; height: 14px;"></i></div>
+                <div class="clear-btn" id="clearSearch" aria-label="Clear Search"><i data-lucide="x" style="width: 14px; height: 14px;"></i></div>
             </div>
             
             <div id="searchSuggestions" class="search-results-glass"></div>
@@ -306,43 +285,48 @@
     </div>
 
     <div class="help-options-container">
-        <a class="help-options-pill pill-contact" href="#">
+        <a class="help-options-pill pill-contact" href="https://atikle.github.io/help/contact/form">
             <div class="icon-box"><i data-lucide="message-square"></i></div>
             <div><h3>Contact Us</h3><p>Chat with our support team for personalized help.</p></div>
         </a>
-        <a class="help-options-pill pill-report" href="#">
+        <a class="help-options-pill pill-report" href="https://atikle.github.io/help/contact/form">
             <div class="icon-box"><i data-lucide="alert-circle"></i></div>
             <div><h3>Report Errors</h3><p>Found a bug in finatikle or My Pocket? Let us know.</p></div>
         </a>
-        <a class="help-options-pill pill-community" href="#">
+        <a class="help-options-pill pill-community" href="https://atikle.github.io/help/contact/form">
             <div class="icon-box"><i data-lucide="users"></i></div>
             <div><h3>Community Profile</h3><p>Update your public details and preferences.</p></div>
         </a>
-        <a class="help-options-pill pill-safety" href="#">
+        <a class="help-options-pill pill-safety" href="https://atikle.github.io/help/contact/form">
             <div class="icon-box"><i data-lucide="shield-check"></i></div>
             <div><h3>Safety Issue</h3><p>Report suspicious activity or security concerns.</p></div>
         </a>
-        <a class="help-options-pill pill-member" href="#">
+        <a class="help-options-pill pill-member" href="https://atikle.github.io/help/contact/form">
             <div class="icon-box"><i data-lucide="user-plus"></i></div>
             <div><h3>Become a Member</h3><p>Unlock exclusive features and community access.</p></div>
         </a>
-        <a class="help-options-pill pill-account" href="#">
+        <a class="help-options-pill pill-account" href="https://atikle.github.io/help/contact/form">
             <div class="icon-box"><i data-lucide="settings"></i></div>
             <div><h3>Account Details</h3><p>Manage your login, security, and personal info.</p></div>
         </a>
     </div>
 
+    <!-- <div style="font-size: 45px; font-weight: 600; width: 100%; text-align: center; padding: 4rem 2rem;">
+        <div class="atikle-multicolor" style="margin: auto; width: 300px;">
+            <a href="https://atikle.github.io/home" style="color: gray;">atikle</a>
+        </div>
+    </div> -->
+
     <script>
         lucide.createIcons();
 
-        // 1. Data Source
         const helpData = [
-            { title: "Reset my Password", desc: "Recover lost account access, login issues", link: "#", icon: "lock" },
-            { title: "atikle Connect Benefits", desc: "Pricing tiers, subscription perks, and rewards", link: "#", icon: "zap" },
-            { title: "Report a bug", desc: "Glitches, errors, app crashes in My Pocket", link: "#", icon: "bug" },
-            { title: "Privacy Policy", desc: "Data usage, cookies, GDPR, and terms", link: "#", icon: "file-text" },
-            { title: "Delete Account", desc: "Permanently remove profile and data", link: "#", icon: "trash-2" },
-            { title: "Enable Two-Factor Auth", desc: "Increase security with SMS or Email verification", link: "#", icon: "shield" }
+            { title: "Reset my Password", desc: "Recover lost account access, login issues", link: "https://atikle.github.io/help/contact/form", icon: "lock" },
+            { title: "atikle Connect Benefits", desc: "Pricing tiers, subscription perks, and rewards", link: "https://atikle.github.io/help/contact/form", icon: "zap" },
+            { title: "Report a bug", desc: "Glitches, errors, app crashes in My Pocket", link: "https://atikle.github.io/help/contact/form", icon: "bug" },
+            { title: "Privacy Policy", desc: "Data usage, cookies, GDPR, and terms", link: "https://atikle.github.io/help/contact/form", icon: "file-text" },
+            { title: "Delete Account", desc: "Permanently remove profile and data", link: "https://atikle.github.io/help/contact/form", icon: "trash-2" },
+            { title: "Enable Two-Factor Auth", desc: "Increase security with Email verification", link: "https://atikle.github.io/help/contact/form", icon: "shield" }
         ];
 
         let currentFocus = -1; 
@@ -351,7 +335,6 @@
         const $clearBtn = $('#clearSearch');
         const $hint = $('#shortcutHint');
 
-        // 2. Search Logic
         $input.on('input', function() {
             const val = $(this).val().toLowerCase().trim();
             $res.empty();
@@ -396,7 +379,6 @@
                     `);
                 }
 
-                // Sticky Footer: Using var(--background-4) for the grey background
                 $res.append(`
                     <a href="https://atikle.github.io/help/contact/form" class="suggestion-item" style="background: var(--background-5);">
                         <div class="result-icon" style="color:#e53e3e;"><i data-lucide="life-buoy" width="20"></i></div>
@@ -416,14 +398,11 @@
             }
         });
 
-        // 3. Clear Button
         $clearBtn.on('click', function() {
             $input.val('').trigger('input').focus();
         });
 
-        // 4. Keyboard Shortcuts
         $(document).on('keydown', function(e) {
-            // Press "/" to focus search
             if (e.key === '/' && !$input.is(':focus')) {
                 e.preventDefault();
                 $input.focus();
@@ -431,20 +410,20 @@
 
             if ($res.is(':visible')) {
                 const $items = $res.find('.suggestion-item');
-                if (e.keyCode == 40) { // Down
+                if (e.keyCode == 40) { 
                     e.preventDefault();
                     currentFocus++;
                     addActive($items);
-                } else if (e.keyCode == 38) { // Up
+                } else if (e.keyCode == 38) {
                     e.preventDefault();
                     currentFocus--;
                     addActive($items);
-                } else if (e.keyCode == 13) { // Enter
+                } else if (e.keyCode == 13) {
                     e.preventDefault();
                     if (currentFocus > -1 && $items[currentFocus]) {
                         $items[currentFocus].click();
                     }
-                } else if (e.keyCode == 27) { // Escape
+                } else if (e.keyCode == 27) {
                     $input.blur();
                     $res.hide();
                 }
@@ -462,7 +441,6 @@
             target[0].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
-        // Close on Outside Click
         $(document).on('click', (e) => { 
             if (!$(e.target).closest('.search-container').length) {
                 $res.hide(); 
