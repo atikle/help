@@ -10,6 +10,9 @@
 
     <script defer src="https://atikle.github.io/framework/universal/theme.js"></script>
     <script defer src="https://atikle.github.io/framework/universal/script.js"></script>
+    <link rel="stylesheet" href="https://atikle.github.io/framework/universal/brand.css">
+    <link rel="stylesheet" href="https://atikle.github.io/framework/universal/style.css">
+    <link rel="stylesheet" href="home.css">
 
     <script>
         $(function() {
@@ -17,10 +20,6 @@
         });
     </script>
     
-    <link rel="stylesheet" href="home.css">
-    <link rel="stylesheet" href="https://atikle.github.io/framework/universal/brand.css">
-    <link rel="stylesheet" href="https://atikle.github.io/framework/universal/style.css">
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CK745SP72W"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -33,17 +32,38 @@
     <link rel="icon" href="https://atikle.github.io/resource/atikle-icon.png" type="image/x-icon">
 
     <style>
-        a { text-decoration: none; -webkit-tap-highlight-color: transparent; }
-        *, *::before, *::after { box-sizing: border-box; }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--background-1);
-            color: var(--text-color-2);
-            margin: 0;
-            min-height: calc(100vh - 66px);
+        /* --- LOCAL COMPONENT VARIABLES --- */
+        /* These handle the specific gradients/transparency not found in your global CSS */
+        :root {
+            --hc-gradient: linear-gradient(to right, #FFAFBD, #C9FFBF);
+            --hc-glass-bg: rgba(255, 255, 255, 0.6);
+            --hc-glass-border: rgba(255, 255, 255, 0.8);
+            --hc-shortcut-bg: rgba(255, 255, 255, 0.5);
         }
 
+        /* Dark Mode overrides for local variables */
+        body.dark-mode {
+            /* Midnight gradient for dark mode so it isn't too bright */
+            --hc-gradient: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            /* Translucent version of your --card-background-1 (#242526) */
+            --hc-glass-bg: rgba(36, 37, 38, 0.75);
+            --hc-glass-border: rgba(255, 255, 255, 0.1);
+            --hc-shortcut-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- BASE STYLES --- */
+        body {
+            background-color: var(--background-1);
+            color: var(--text-color-1);
+            min-height: calc(100vh - 66px);
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        a { text-decoration: none; -webkit-tap-highlight-color: transparent; }
+        *, *::before, *::after { box-sizing: border-box; }
+
+        /* --- HEADER FOIL --- */
         .help-centre-foil {
             margin-top: 66px;
             width: 100%;
@@ -51,20 +71,27 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(to right, #FFAFBD, #C9FFBF); 
+            background: var(--hc-gradient);
+            transition: background 0.5s ease;
         }
 
         .help-centre-foil h1 {
-            color: black; font-size: 35px; font-weight: 700;
+            color: #050505; /* Always dark on the pastel gradient in Light Mode */
+            font-size: 35px; font-weight: 700;
             line-height: 35px; margin-bottom: 10px;
         }
         
         .help-centre-foil h2 {
-            color: white; font-size: 25px; font-weight: 500;
+            color: rgba(0,0,0, 0.7);
+            font-size: 25px; font-weight: 500;
             line-height: 25px; margin-top: 0;
         }
 
-        /* --- 1. SEARCH BAR CONTAINER --- */
+        /* Dark mode text adjustment for the header foil */
+        body.dark-mode .help-centre-foil h1 { color: white; }
+        body.dark-mode .help-centre-foil h2 { color: rgba(255,255,255,0.8); }
+
+        /* --- SEARCH CONTAINER --- */
         .search-container {
             max-width: 620px;
             margin: 40px auto 0;
@@ -72,25 +99,24 @@
             z-index: 50;
         }
 
-        /* The Glass Input Box */
         .search-glass-box {
             display: flex;
             align-items: center;
             padding: 14px 20px;
-            background: rgba(255, 255, 255, 0.6); /* More opaque for contrast */
+            background: var(--hc-glass-bg);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            border-radius: 16px; /* Slightly squarer for modern look */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--hc-glass-border);
+            border-radius: 16px;
+            box-shadow: var(--shadow-2);
+            transition: all var(--transition-speed-normal) var(--ease-out-quad);
         }
 
         .search-glass-box:focus-within {
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--card-background-1);
             transform: scale(1.01);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            border-color: #3182ce;
+            box-shadow: var(--shadow-1);
+            border-color: var(--button-background-1);
         }
 
         #helpSearch {
@@ -100,49 +126,50 @@
             outline: none;
             font-size: 1.05rem;
             margin-left: 12px;
-            color: #1a202c;
+            color: var(--text-color-1);
             font-weight: 500;
         }
 
-        #helpSearch::placeholder { color: #718096; font-weight: 400; }
+        #helpSearch::placeholder { color: var(--text-color-2); font-weight: 400; }
+        .search-icon-svg { color: var(--text-color-2); }
 
         /* Shortcut Hint (/) */
         .shortcut-hint {
-            border: 1px solid #cbd5e0;
+            border: 1px solid var(--text-color-2);
             border-radius: 4px;
             padding: 2px 6px;
             font-size: 0.75rem;
-            color: #718096;
-            background: rgba(255,255,255,0.5);
-            pointer-events: none; /* Let clicks pass through */
+            color: var(--text-color-2);
+            background: var(--hc-shortcut-bg);
+            pointer-events: none;
         }
 
-        /* Clear Button (X) */
+        /* Clear Button */
         .clear-btn {
             display: none;
             cursor: pointer;
             padding: 4px;
             border-radius: 50%;
-            background: #e2e8f0;
-            color: #4a5568;
+            background: var(--button-background-2);
+            color: var(--text-color-2);
             margin-left: 8px;
-            transition: background 0.2s;
+            transition: background var(--transition-speed-fast);
         }
-        .clear-btn:hover { background: #cbd5e0; color: #2d3748; }
+        .clear-btn:hover { background: var(--hover-overlay); color: var(--text-color-1); }
 
-        /* --- 2. SEARCH RESULTS MODAL --- */
+        /* --- SEARCH DROPDOWN --- */
         .search-results-glass {
             position: absolute;
             top: calc(100% + 12px);
             left: 0;
             right: 0;
-            background: white;
+            background: var(--card-background-1); /* Uses your global card color */
             border-radius: 16px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--hover-overlay);
             display: none;
             overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            animation: slideDown 0.2s ease-out forwards;
+            box-shadow: var(--shadow-1);
+            animation: slideDown var(--transition-speed-fast) ease-out forwards;
         }
 
         @keyframes slideDown {
@@ -157,62 +184,39 @@
             gap: 16px;
             text-align: left;
             cursor: pointer;
-            border-bottom: 1px solid #f7fafc;
-            color: #2d3748;
-            transition: background 0.1s ease;
+            border-bottom: 1px solid var(--background-4);
+            color: var(--text-color-1);
+            transition: background var(--transition-speed-fast);
         }
 
         .suggestion-item:last-child { border-bottom: none; }
+        .suggestion-item:hover, .suggestion-item.active { background: var(--hover-overlay); }
 
-        /* Hover & Active States */
-        .suggestion-item:hover, .suggestion-item.active { 
-            background: #ebf8ff; 
-        }
-        
-        /* Icon styling in results */
-        .result-icon {
-            color: #a0aec0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .suggestion-item:hover .result-icon, .suggestion-item.active .result-icon {
-            color: #3182ce;
-        }
+        .result-icon { color: var(--text-color-2); display: flex; align-items: center; justify-content: center; }
+        .suggestion-item:hover .result-icon, .suggestion-item.active .result-icon { color: var(--button-background-1); }
 
         .suggestion-content { flex: 1; }
-
-        .suggestion-title {
-            font-weight: 600;
-            font-size: 0.95rem;
-            display: block;
-        }
-
-        .suggestion-desc {
-            font-size: 0.8rem;
-            color: #718096;
-            margin-top: 2px;
-            display: block;
-        }
+        .suggestion-title { font-weight: 600; font-size: 0.95rem; display: block; color: var(--text-color-1); }
+        .suggestion-desc { font-size: 0.8rem; color: var(--text-color-2); margin-top: 2px; display: block; }
 
         /* Highlight Logic */
         .highlight {
-            color: #2b6cb0;
-            background: rgba(49, 130, 206, 0.15);
+            color: var(--button-background-1);
+            background: rgba(24, 119, 242, 0.1);
             font-weight: 700;
             border-radius: 2px;
         }
 
         .no-results {
             padding: 30px;
-            color: #718096;
+            color: var(--text-color-2);
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 10px;
         }
 
-        /* --- Section Layouts --- */
+        /* --- QUICK ACTIONS SECTION --- */
         .section-header {
             max-width: 1200px;
             margin: 60px auto 20px;
@@ -221,8 +225,8 @@
             align-items: center;
             gap: 15px;
         }
-        .section-header h2 { font-size: 1.5rem; color: #2d3748; margin: 0; }
-        .section-header::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; }
+        .section-header h2 { font-size: 1.5rem; color: var(--text-color-1); margin: 0; }
+        .section-header::after { content: ""; flex: 1; height: 1px; background: var(--background-4); }
 
         .help-options-container {
             max-width: 1200px;
@@ -234,24 +238,38 @@
         }
 
         .help-options-pill {
-            background: white;
+            background: var(--card-background-1);
             padding: 30px 24px;
             border-radius: 16px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--background-4);
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             gap: 15px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all var(--transition-speed-normal) var(--ease-out-quad);
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-2);
         }
-        .help-options-pill:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
-        .icon-box { padding: 12px; border-radius: 12px; background: #ebf8ff; color: #3182ce; transition: background 0.3s ease; }
-        .help-options-pill h3 { font-size: 1.1rem; color: #2d3748; margin: 0; font-weight: 600; }
-        .help-options-pill p { font-size: 0.9rem; color: #718096; margin: 0; line-height: 1.5; }
 
-        /* Pill Colors */
+        .help-options-pill:hover { 
+            transform: translateY(-5px); 
+            box-shadow: var(--shadow-1); 
+            border-color: var(--button-background-1);
+        }
+
+        .icon-box { 
+            padding: 12px; 
+            border-radius: 12px; 
+            background: var(--background-4); 
+            color: var(--button-background-1); 
+            transition: background var(--transition-speed-normal); 
+        }
+
+        .help-options-pill h3 { font-size: 1.1rem; color: var(--text-color-1); margin: 0; font-weight: 600; }
+        .help-options-pill p { font-size: 0.9rem; color: var(--text-color-2); margin: 0; line-height: 1.5; }
+
+        /* Card Accents */
         .pill-contact { --accent-color: #007bff; }
         .pill-report { --accent-color: cadetblue; }
         .pill-community { --accent-color: #7d3c98; }
@@ -260,8 +278,8 @@
         .pill-account { --accent-color: rosybrown; }
 
         .help-options-pill:hover { border-color: var(--accent-color); }
-        .help-options-pill .icon-box { color: var(--accent-color); background: color-mix(in srgb, var(--accent-color), white 90%); }
         .help-options-pill:hover .icon-box { background: var(--accent-color); color: white; }
+
     </style>
 </head>
 <body>
@@ -273,14 +291,10 @@
             
         <div class="search-container">
             <div class="search-glass-box">
-                <i data-lucide="search" style="opacity: 0.5;"></i>
+                <i data-lucide="search" class="search-icon-svg" style="opacity: 0.5;"></i>
                 <input type="text" id="helpSearch" placeholder="Search for answers..." autocomplete="off">
-                
                 <div class="shortcut-hint" id="shortcutHint">/</div>
-                
-                <div class="clear-btn" id="clearSearch">
-                    <i data-lucide="x" style="width: 14px; height: 14px;"></i>
-                </div>
+                <div class="clear-btn" id="clearSearch"><i data-lucide="x" style="width: 14px; height: 14px;"></i></div>
             </div>
             
             <div id="searchSuggestions" class="search-results-glass"></div>
@@ -294,52 +308,34 @@
     <div class="help-options-container">
         <a class="help-options-pill pill-contact" href="#">
             <div class="icon-box"><i data-lucide="message-square"></i></div>
-            <div>
-                <h3>Contact Us</h3>
-                <p>Chat with our support team for personalized help.</p>
-            </div>
+            <div><h3>Contact Us</h3><p>Chat with our support team for personalized help.</p></div>
         </a>
         <a class="help-options-pill pill-report" href="#">
             <div class="icon-box"><i data-lucide="alert-circle"></i></div>
-            <div>
-                <h3>Report Errors</h3>
-                <p>Found a bug in finatikle or My Pocket? Let us know.</p>
-            </div>
+            <div><h3>Report Errors</h3><p>Found a bug in finatikle or My Pocket? Let us know.</p></div>
         </a>
         <a class="help-options-pill pill-community" href="#">
             <div class="icon-box"><i data-lucide="users"></i></div>
-            <div>
-                <h3>Community Profile</h3>
-                <p>Update your public details and preferences.</p>
-            </div>
+            <div><h3>Community Profile</h3><p>Update your public details and preferences.</p></div>
         </a>
         <a class="help-options-pill pill-safety" href="#">
             <div class="icon-box"><i data-lucide="shield-check"></i></div>
-            <div>
-                <h3>Safety Issue</h3>
-                <p>Report suspicious activity or security concerns.</p>
-            </div>
+            <div><h3>Safety Issue</h3><p>Report suspicious activity or security concerns.</p></div>
         </a>
         <a class="help-options-pill pill-member" href="#">
             <div class="icon-box"><i data-lucide="user-plus"></i></div>
-            <div>
-                <h3>Become a Member</h3>
-                <p>Unlock exclusive features and community access.</p>
-            </div>
+            <div><h3>Become a Member</h3><p>Unlock exclusive features and community access.</p></div>
         </a>
         <a class="help-options-pill pill-account" href="#">
             <div class="icon-box"><i data-lucide="settings"></i></div>
-            <div>
-                <h3>Account Details</h3>
-                <p>Manage your login, security, and personal info.</p>
-            </div>
+            <div><h3>Account Details</h3><p>Manage your login, security, and personal info.</p></div>
         </a>
     </div>
 
     <script>
         lucide.createIcons();
 
-        // 1. Data Source with ICON NAMES
+        // 1. Data Source
         const helpData = [
             { title: "Reset my Password", desc: "Recover lost account access, login issues", link: "#", icon: "lock" },
             { title: "atikle Connect Benefits", desc: "Pricing tiers, subscription perks, and rewards", link: "#", icon: "zap" },
@@ -361,12 +357,10 @@
             $res.empty();
             currentFocus = -1;
 
-            // Toggle UI elements
             if (val.length > 0) {
                 $clearBtn.show();
-                $hint.hide(); // Hide the shortcut hint when typing
+                $hint.hide();
                 
-                // Search Logic
                 const matches = helpData.filter(item => 
                     item.title.toLowerCase().includes(val) || 
                     item.desc.toLowerCase().includes(val)
@@ -402,9 +396,9 @@
                     `);
                 }
 
-                // Sticky Contact Footer
+                // Sticky Footer: Using var(--background-4) for the grey background
                 $res.append(`
-                    <a href="https://atikle.github.io/help/contact/form" class="suggestion-item" style="background: #fff5f5;">
+                    <a href="https://atikle.github.io/help/contact/form" class="suggestion-item" style="background: var(--background-5);">
                         <div class="result-icon" style="color:#e53e3e;"><i data-lucide="life-buoy" width="20"></i></div>
                         <div class="suggestion-content">
                             <span class="suggestion-title" style="color:#e53e3e;">Still need help?</span>
@@ -414,7 +408,7 @@
                 `);
                 
                 $res.show();
-                lucide.createIcons(); // Re-render icons for new content
+                lucide.createIcons();
             } else { 
                 $res.hide();
                 $clearBtn.hide();
@@ -422,7 +416,7 @@
             }
         });
 
-        // 3. Clear Button Logic
+        // 3. Clear Button
         $clearBtn.on('click', function() {
             $input.val('').trigger('input').focus();
         });
@@ -435,7 +429,6 @@
                 $input.focus();
             }
 
-            // Navigation (only if results are open)
             if ($res.is(':visible')) {
                 const $items = $res.find('.suggestion-item');
                 if (e.keyCode == 40) { // Down
