@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <script defer src="https://atikle.github.io/framework/universal/theme.js"></script>
     <script defer src="https://atikle.github.io/framework/universal/script.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    
     <script>
         $(function() {
-            // Ensure the path is correct relative to your HTML files
             $("#navbar-placeholder").load("https://atikle.github.io/framework/navbar-1/index.html");
         });
     </script>
@@ -22,13 +21,11 @@
     <link rel="stylesheet" href="https://atikle.github.io/framework/universal/brand.css">
     <link rel="stylesheet" href="https://atikle.github.io/framework/universal/style.css">
 
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CK745SP72W"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-CK745SP72W');
     </script>
 
@@ -36,15 +33,8 @@
     <link rel="icon" href="https://atikle.github.io/resource/atikle-icon.png" type="image/x-icon">
 
     <style>
-        a {
-            text-decoration: none;
-            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
-        }
-
-        /* Base Styles & Resets */
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
+        a { text-decoration: none; -webkit-tap-highlight-color: transparent; }
+        *, *::before, *::after { box-sizing: border-box; }
         
         body {
             font-family: 'Inter', sans-serif;
@@ -57,174 +47,221 @@
         .help-centre-foil {
             margin-top: 66px;
             width: 100%;
-            height: auto;
             padding: 140px 20px;
             align-items: center;
             justify-content: center;
             text-align: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-
-            background: #C9FFBF;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #FFAFBD, #C9FFBF);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #FFAFBD, #C9FFBF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, #FFAFBD, #C9FFBF); 
         }
 
-        .help-centre-foil h1{
-            color: black;
-            font-size: 35px;
-            font-weight: 700;
-            line-height: 35px;
+        .help-centre-foil h1 {
+            color: black; font-size: 35px; font-weight: 700;
+            line-height: 35px; margin-bottom: 10px;
         }
         
-        .help-centre-foil h2{
-            color: white;
-            font-size: 25px;
-            font-weight: 500;
-            line-height: 25px;
+        .help-centre-foil h2 {
+            color: white; font-size: 25px; font-weight: 500;
+            line-height: 25px; margin-top: 0;
         }
 
-
-
-        .help-centre-label-1 {
-            width: 90%;
-            max-width: 1460px;
-            margin: auto;
-            padding-top: 100px;
-            padding-bottom: 10px;
-            color: var(--text-color-1);
-            border-bottom: 2px solid silver;
-            font-size: 25px;
-            font-weight: 500;
-            line-height: 25px;
+        /* --- 1. SEARCH BAR CONTAINER --- */
+        .search-container {
+            max-width: 620px;
+            margin: 40px auto 0;
+            position: relative;
+            z-index: 50;
         }
 
+        /* The Glass Input Box */
+        .search-glass-box {
+            display: flex;
+            align-items: center;
+            padding: 14px 20px;
+            background: rgba(255, 255, 255, 0.6); /* More opaque for contrast */
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 16px; /* Slightly squarer for modern look */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
+        .search-glass-box:focus-within {
+            background: rgba(255, 255, 255, 0.95);
+            transform: scale(1.01);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #3182ce;
+        }
+
+        #helpSearch {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 1.05rem;
+            margin-left: 12px;
+            color: #1a202c;
+            font-weight: 500;
+        }
+
+        #helpSearch::placeholder { color: #718096; font-weight: 400; }
+
+        /* Shortcut Hint (/) */
+        .shortcut-hint {
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            color: #718096;
+            background: rgba(255,255,255,0.5);
+            pointer-events: none; /* Let clicks pass through */
+        }
+
+        /* Clear Button (X) */
+        .clear-btn {
+            display: none;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            color: #4a5568;
+            margin-left: 8px;
+            transition: background 0.2s;
+        }
+        .clear-btn:hover { background: #cbd5e0; color: #2d3748; }
+
+        /* --- 2. SEARCH RESULTS MODAL --- */
+        .search-results-glass {
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            display: none;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            animation: slideDown 0.2s ease-out forwards;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .suggestion-item {
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-align: left;
+            cursor: pointer;
+            border-bottom: 1px solid #f7fafc;
+            color: #2d3748;
+            transition: background 0.1s ease;
+        }
+
+        .suggestion-item:last-child { border-bottom: none; }
+
+        /* Hover & Active States */
+        .suggestion-item:hover, .suggestion-item.active { 
+            background: #ebf8ff; 
+        }
+        
+        /* Icon styling in results */
+        .result-icon {
+            color: #a0aec0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .suggestion-item:hover .result-icon, .suggestion-item.active .result-icon {
+            color: #3182ce;
+        }
+
+        .suggestion-content { flex: 1; }
+
+        .suggestion-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: block;
+        }
+
+        .suggestion-desc {
+            font-size: 0.8rem;
+            color: #718096;
+            margin-top: 2px;
+            display: block;
+        }
+
+        /* Highlight Logic */
+        .highlight {
+            color: #2b6cb0;
+            background: rgba(49, 130, 206, 0.15);
+            font-weight: 700;
+            border-radius: 2px;
+        }
+
+        .no-results {
+            padding: 30px;
+            color: #718096;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- Section Layouts --- */
+        .section-header {
+            max-width: 1200px;
+            margin: 60px auto 20px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .section-header h2 { font-size: 1.5rem; color: #2d3748; margin: 0; }
+        .section-header::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; }
 
         .help-options-container {
-            width: 100%;
-            max-width: 1500px;
-            height: auto;
-            margin: auto;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 40px;
-            background-color: var(--background-1);
-            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
         }
 
         .help-options-pill {
-            flex: 30%;
-            min-width: 300px;
-            align-content: center;
-            background-color: var(--background-1);
-            box-shadow: var(--shadow-1);
-            border-left: 1px solid gray;
-            border-right: 1px solid gray;
-            border-bottom: 1px solid gray;
-            border-top: 4px solid;
-            padding: 50px 20px;
-
-            cursor: pointer;
-            transition: color 0.4s ease; /* Smooth transition for the text color */
-
+            background: white;
+            padding: 30px 24px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            z-index: 1;
         }
+        .help-options-pill:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .icon-box { padding: 12px; border-radius: 12px; background: #ebf8ff; color: #3182ce; transition: background 0.3s ease; }
+        .help-options-pill h3 { font-size: 1.1rem; color: #2d3748; margin: 0; font-weight: 600; }
+        .help-options-pill p { font-size: 0.9rem; color: #718096; margin: 0; line-height: 1.5; }
 
-        .help-options-pill h3 {
-            color: var(--text-color-1);
-            position: relative; /* Needed to set a z-index */
-            z-index: 2; /* Keeps the text on top of the ::before overlay */
-            margin: 0;
-            font-size: 20px;
-            font-weight: 500;
-        }
+        /* Pill Colors */
+        .pill-contact { --accent-color: #007bff; }
+        .pill-report { --accent-color: cadetblue; }
+        .pill-community { --accent-color: #7d3c98; }
+        .pill-safety { --accent-color: #29487d; }
+        .pill-member { --accent-color: #52c882; }
+        .pill-account { --accent-color: rosybrown; }
 
-        .help-options-pill::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-
-            transform: scaleY(0); /* Initially, the overlay is scaled down to zero height, making it invisible */
-            transform-origin: top; /* Sets the origin of the transform to the top edge, making it roll down */
-            transition: transform 0.4s cubic-bezier(0.5, 1, 0.89, 1); /* The animation for the transform property */
-            z-index: -1; /* Places the overlay behind the div's actual content */
-        }
-
-        .help-options-pill:hover::before {
-            transform: scaleY(1); /* On hover, scale the overlay back to its full height (100%) */
-        }
-
-
-
-        .help-pill-1 {
-            border-top-color: cadetblue;
-        }
-        .help-pill-1::before {
-            background-color: cadetblue;
-        }
-
-        .help-pill-2 {
-            border-top-color: #007bff;
-        }
-        .help-pill-2::before {
-            background-color: #007bff;
-        }
-
-        .help-pill-3 {
-            border-top-color: navajowhite;
-        }
-        .help-pill-3::before {
-            background-color: navajowhite;
-        }
-
-        .help-pill-4 {
-            border-top-color: #7d3c98;
-        }
-        .help-pill-4::before {
-            background-color: #7d3c98;
-        }
-
-        .help-pill-5 {
-            border-top-color: gray;
-        }
-        .help-pill-5::before {
-            background-color: gray;
-        }
-
-        .help-pill-6 {
-            border-top-color: #52c882;
-        }
-        .help-pill-6::before {
-            background-color: #52c882;
-        }
-
-        .help-pill-7 {
-            border-top-color: #29487d;
-        }
-        .help-pill-7::before {
-            background-color: #29487d;
-        }
-
-        .help-pill-8 {
-            border-top-color: rosybrown;
-        }
-        .help-pill-8::before {
-            background-color: rosybrown;
-        }
-
-        .help-pill-9 {
-            border-top-color: powderblue;
-        }
-        .help-pill-9::before {
-            background-color: powderblue;
-        }
+        .help-options-pill:hover { border-color: var(--accent-color); }
+        .help-options-pill .icon-box { color: var(--accent-color); background: color-mix(in srgb, var(--accent-color), white 90%); }
+        .help-options-pill:hover .icon-box { background: var(--accent-color); color: white; }
     </style>
 </head>
 <body>
@@ -232,50 +269,212 @@
 
     <div class="help-centre-foil">
         <h1>Welcome to atikle Help Centre</h1>
-        <h2>How can we help you?</h1>
+        <h2>How can we help you?</h2>
+            
+        <div class="search-container">
+            <div class="search-glass-box">
+                <i data-lucide="search" style="opacity: 0.5;"></i>
+                <input type="text" id="helpSearch" placeholder="Search for answers..." autocomplete="off">
+                
+                <div class="shortcut-hint" id="shortcutHint">/</div>
+                
+                <div class="clear-btn" id="clearSearch">
+                    <i data-lucide="x" style="width: 14px; height: 14px;"></i>
+                </div>
+            </div>
+            
+            <div id="searchSuggestions" class="search-results-glass"></div>
+        </div>
     </div>
 
-    <div class="help-centre-label-1">
-        Quick actions
+    <div class="section-header">
+        <h2>Quick Actions</h2>
     </div>
 
     <div class="help-options-container">
-        <a class="help-options-pill help-pill-1" href="https://atikle.github.io/help/contact/form">
-            <h3>Contacts Us</h3>
+        <a class="help-options-pill pill-contact" href="#">
+            <div class="icon-box"><i data-lucide="message-square"></i></div>
+            <div>
+                <h3>Contact Us</h3>
+                <p>Chat with our support team for personalized help.</p>
+            </div>
         </a>
-
-        <a class="help-options-pill help-pill-2" href="https://atikle.github.io/help/contact/form">
-            <h3>Report errors in finatikle</h3>
+        <a class="help-options-pill pill-report" href="#">
+            <div class="icon-box"><i data-lucide="alert-circle"></i></div>
+            <div>
+                <h3>Report Errors</h3>
+                <p>Found a bug in finatikle or My Pocket? Let us know.</p>
+            </div>
         </a>
-
-        <a class="help-options-pill help-pill-3" href="https://atikle.github.io/help/contact/form">
-            <h3>Report errors in My Pocket</h3>
+        <a class="help-options-pill pill-community" href="#">
+            <div class="icon-box"><i data-lucide="users"></i></div>
+            <div>
+                <h3>Community Profile</h3>
+                <p>Update your public details and preferences.</p>
+            </div>
         </a>
-
-        <a class="help-options-pill help-pill-4" href="https://atikle.github.io/help/contact/form">
-            <h3>Report activity on atikle connect</h3>
+        <a class="help-options-pill pill-safety" href="#">
+            <div class="icon-box"><i data-lucide="shield-check"></i></div>
+            <div>
+                <h3>Safety Issue</h3>
+                <p>Report suspicious activity or security concerns.</p>
+            </div>
         </a>
-
-        <a class="help-options-pill help-pill-5" href="https://atikle.github.io/help/contact/form">
-            <h3>Flag webinar</h3>
+        <a class="help-options-pill pill-member" href="#">
+            <div class="icon-box"><i data-lucide="user-plus"></i></div>
+            <div>
+                <h3>Become a Member</h3>
+                <p>Unlock exclusive features and community access.</p>
+            </div>
         </a>
-
-        <a class="help-options-pill help-pill-6" href="https://atikle.github.io/help/contact/form">
-            <h3>Update Community profile</h3>
-        </a>
-
-        <a class="help-options-pill help-pill-7" href="https://atikle.github.io/help/contact/form">
-            <h3>Safety Issue</h3>
-        </a>
-
-        <a class="help-options-pill help-pill-8" href="https://atikle.github.io/help/contact/form">
-            <h3>Update account details</h3>
-        </a>
-
-        <a class="help-options-pill help-pill-9" href="https://atikle.github.io/help/contact/form">
-            <h3>Become member</h3>
+        <a class="help-options-pill pill-account" href="#">
+            <div class="icon-box"><i data-lucide="settings"></i></div>
+            <div>
+                <h3>Account Details</h3>
+                <p>Manage your login, security, and personal info.</p>
+            </div>
         </a>
     </div>
 
+    <script>
+        lucide.createIcons();
+
+        // 1. Data Source with ICON NAMES
+        const helpData = [
+            { title: "Reset my Password", desc: "Recover lost account access, login issues", link: "#", icon: "lock" },
+            { title: "atikle Connect Benefits", desc: "Pricing tiers, subscription perks, and rewards", link: "#", icon: "zap" },
+            { title: "Report a bug", desc: "Glitches, errors, app crashes in My Pocket", link: "#", icon: "bug" },
+            { title: "Privacy Policy", desc: "Data usage, cookies, GDPR, and terms", link: "#", icon: "file-text" },
+            { title: "Delete Account", desc: "Permanently remove profile and data", link: "#", icon: "trash-2" },
+            { title: "Enable Two-Factor Auth", desc: "Increase security with SMS or Email verification", link: "#", icon: "shield" }
+        ];
+
+        let currentFocus = -1; 
+        const $input = $('#helpSearch');
+        const $res = $('#searchSuggestions');
+        const $clearBtn = $('#clearSearch');
+        const $hint = $('#shortcutHint');
+
+        // 2. Search Logic
+        $input.on('input', function() {
+            const val = $(this).val().toLowerCase().trim();
+            $res.empty();
+            currentFocus = -1;
+
+            // Toggle UI elements
+            if (val.length > 0) {
+                $clearBtn.show();
+                $hint.hide(); // Hide the shortcut hint when typing
+                
+                // Search Logic
+                const matches = helpData.filter(item => 
+                    item.title.toLowerCase().includes(val) || 
+                    item.desc.toLowerCase().includes(val)
+                );
+                
+                if (matches.length) {
+                    matches.forEach(m => {
+                        const regex = new RegExp(`(${val})`, "gi");
+                        const titleHigh = m.title.replace(regex, '<span class="highlight">$1</span>');
+                        
+                        let descHtml = m.desc;
+                        if(m.desc.toLowerCase().includes(val)) {
+                            descHtml = m.desc.replace(regex, '<span class="highlight">$1</span>');
+                        }
+
+                        $res.append(`
+                            <a href="${m.link}" class="suggestion-item">
+                                <div class="result-icon"><i data-lucide="${m.icon}" width="20"></i></div>
+                                <div class="suggestion-content">
+                                    <span class="suggestion-title">${titleHigh}</span>
+                                    <span class="suggestion-desc">${descHtml}</span>
+                                </div>
+                                <i data-lucide="chevron-right" style="opacity:0.3; width:16px;"></i>
+                            </a>
+                        `);
+                    });
+                } else {
+                    $res.append(`
+                        <div class="no-results">
+                            <i data-lucide="search-x" width="32" style="opacity:0.5"></i>
+                            <span>No results found for "${val}"</span>
+                        </div>
+                    `);
+                }
+
+                // Sticky Contact Footer
+                $res.append(`
+                    <a href="https://atikle.github.io/help/contact/form" class="suggestion-item" style="background: #fff5f5;">
+                        <div class="result-icon" style="color:#e53e3e;"><i data-lucide="life-buoy" width="20"></i></div>
+                        <div class="suggestion-content">
+                            <span class="suggestion-title" style="color:#e53e3e;">Still need help?</span>
+                            <span class="suggestion-desc">Contact our support team directly</span>
+                        </div>
+                    </a>
+                `);
+                
+                $res.show();
+                lucide.createIcons(); // Re-render icons for new content
+            } else { 
+                $res.hide();
+                $clearBtn.hide();
+                $hint.show();
+            }
+        });
+
+        // 3. Clear Button Logic
+        $clearBtn.on('click', function() {
+            $input.val('').trigger('input').focus();
+        });
+
+        // 4. Keyboard Shortcuts
+        $(document).on('keydown', function(e) {
+            // Press "/" to focus search
+            if (e.key === '/' && !$input.is(':focus')) {
+                e.preventDefault();
+                $input.focus();
+            }
+
+            // Navigation (only if results are open)
+            if ($res.is(':visible')) {
+                const $items = $res.find('.suggestion-item');
+                if (e.keyCode == 40) { // Down
+                    e.preventDefault();
+                    currentFocus++;
+                    addActive($items);
+                } else if (e.keyCode == 38) { // Up
+                    e.preventDefault();
+                    currentFocus--;
+                    addActive($items);
+                } else if (e.keyCode == 13) { // Enter
+                    e.preventDefault();
+                    if (currentFocus > -1 && $items[currentFocus]) {
+                        $items[currentFocus].click();
+                    }
+                } else if (e.keyCode == 27) { // Escape
+                    $input.blur();
+                    $res.hide();
+                }
+            }
+        });
+
+        function addActive(items) {
+            if (!items) return;
+            items.removeClass('active');
+            if (currentFocus >= items.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = (items.length - 1);
+            
+            const target = $(items[currentFocus]);
+            target.addClass('active');
+            target[0].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Close on Outside Click
+        $(document).on('click', (e) => { 
+            if (!$(e.target).closest('.search-container').length) {
+                $res.hide(); 
+            }
+        });
+    </script>
 </body>
 </html>
